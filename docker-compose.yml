@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  frontend:
+    env_file:
+      - ./frontend/.env
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    container_name: web
+    restart: always
+    ports:
+      - 3000:3000
+  backend:
+    env_file:
+      - ./backend/.env
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    container_name: backend
+    restart: always
+    volumes:
+      - ./backend/:/code/
+      - ~/.config/gcloud:/root/.config/gcloud
+      - ./backend/scripts/start.sh:/code/scripts/start.sh
+      # + 映射gpt4all项目到容器
+      - /root/tmp/:/tmp/
+    ports:
+      - 5050:5050
