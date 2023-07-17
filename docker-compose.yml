@@ -25,5 +25,7 @@ services:
       - ./backend/scripts/start.sh:/code/scripts/start.sh
       # + 映射gpt4all项目到容器
       - /root/tmp/:/tmp/
+      # + 映射模型
+      - /root/local_models/:/local_models/
     ports:
       - 5050:5050
